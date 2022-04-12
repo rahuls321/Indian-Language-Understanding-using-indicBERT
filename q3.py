@@ -6,6 +6,7 @@ import regex
 from nltk import word_tokenize, ngrams
 import matplotlib.pyplot as plt
 import argparse
+import numpy as np
 
 def process_sent(sent):
     normalized = normalizer.normalize(sent)
@@ -253,14 +254,23 @@ def get_syllb_ngrams(line, unigrams_freq, bigrams_freq, trigrams_freq, quadrigra
     return unigrams_freq, bigrams_freq, trigrams_freq, quadrigrams_freq
 
 def get_zipfian_dist_plot(ngrams, folder, choice):
-    plt.bar(*zip(*ngrams.items()))
-    plt.xticks([])
-    plt.savefig('output/'+folder+'/'+choice+'.jpg')
-    plt.close()
+    # plt.bar(*zip(*ngrams.items()))
+    # plt.xticks([])
+    # plt.savefig('output/'+folder+'/'+choice+'.jpg')
+    # plt.close()
 
     file1 = open('output/'+folder+'/'+choice+'.txt',"w")
     with file1 as f:
         print(ngrams, file=f)
+
+    y = np.log(list(ngrams.values()))
+    x1 = np.log(np.arange(len(ngrams.items()))+1)
+    plt.plot(x1, y)
+    plt.xlabel("log(rank)")  # add X-axis label
+    plt.ylabel("log(freq)")  # add Y-axis label
+    plt.title("Zipfian Distribution - log(freq) vs log(rank)")  # add title
+    plt.savefig('output/'+folder+'/'+choice+'.jpg')
+    plt.close()
 
 
 def get_ngrams(input_path, suffixes, halant):
@@ -347,7 +357,3 @@ if __name__ == "__main__":
     get_zipfian_dist_plot(dict(s_bigrams), 'syllable', 'bigram')
     get_zipfian_dist_plot(dict(s_trigrams), 'syllable', 'trigram')
     get_zipfian_dist_plot(dict(s_quadrigrams), 'syllable', 'quadrigram')
-
-    '''
-    1. considered halant character seperately in unigram, bigram
-    '''
