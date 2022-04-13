@@ -29,13 +29,17 @@ This folder contains following directories and files
     d.  Hindi Corpora - 1.8 B tokens hindi corpora. (Size - approx 22 GB)
 2. utils - It contains the necessary file which takes time to build like glove_vec
 3. output - a folder contains all the generated outputs for all 3 questions.
+    a. For Q1, all the outputs corresponding to different dimensions and different pretrained vector
+    b. loss.jpg - Plot Training loss vs Validation acc for Q2
+    c. log.txt - Logs of the training for the NER tasks for Q2.
+    d. char, syllable, word - 3 folders for Q3 outputs.
 4. q1.py - This is file for first question in the assignment which majorily doing the task of word similarity on different thresholds.
 5. q2.py - Building NER model for Hindi language.
 6. q3.py - This file is for finding all the most frequent char, word and syllable of unigrams, bigrams, trigrams, quadrigrams.
 7. run.sh - This is the file that contains all the variable parameters mentioned in the below section.
 8. Makefile - There are two commands in the makefile one is "install", "run"
     a.  make install - install all the required packages and download the drive files (please follow the drive link if you're not able to download from the make install)
-    b.  make run - will run the whole assignments 
+    b.  make run - will run the whole assignments
 
 *** run.sh is the top-level script that runs the entire assignment. ***
 
@@ -66,9 +70,9 @@ These are the variables that I'm passing as an arguments in the program. [ chang
 
 ## Remarks
 ### Q1
-1. For Q1, I considered 50d vectors (glove, word2vec, fasttext) to get similarity score of two words
+1. For Q1, I'v considered 50d, 100d vectors (glove, word2vec, fasttext) to get similarity score of two words
 2. These thresholds have been considered while finding the accuracy --> thresholds = [4, 5, 6, 7, 8]
-3. I have also saved the similar word based on different thresholds in the 'output' folder. Please check
+3. I have also saved the similar word based on different thresholds as per output format in the 'output' folder. Please check
 
 ### Q2
 1. NER tasks Code implemented in pytorch.
@@ -82,5 +86,9 @@ These are the variables that I'm passing as an arguments in the program. [ chang
 1. Considered this website (https://jrgraphix.net/r/Unicode/0900-097F) to find all the unicode of the hindi character
 2. Considered halant character seperately in unigram, bigram
 3. All the unigrams, bigrams, trigrams, and quadrigrams are saved in the output folder for all three char, word, and syllable seperately.
+4. For Zipfian Distribution, based on plot whichever follows straight line in the plot of log(frequency) vs log(rank) will follow zipfian distribution
+    a. For char: trigram and quadrigram follows zipfian distribution.
+    b. For syllable: bigram, trigram and quadrigram follows zipfian distribution
+    c. For word: unigram, bigram, trigram and quadrigram all follows zipfian distribution.
 
 ### Incase you face any issue in running the code, just let me know here - rahulkumar21@iitk.ac.in

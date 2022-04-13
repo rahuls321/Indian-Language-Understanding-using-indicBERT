@@ -9,7 +9,8 @@ cbow_path="50/cbow/hi-d50-m2-cbow.model"
 sg_path="50/sg/hi-d50-m2-sg.model"
 fasttext_path="50/fasttext/hi-d50-m2-fasttext.model"
 word_similarity_data="data/Word_similarity/hindi.txt"
-glove_flag=0
+glove_flag=1
+dim='50,100'
 
 #Q2
 epochs=10
@@ -17,9 +18,10 @@ batch_size=32
 datapath='data/hindi_ner/hi_train.conll'
 
 #Q3
-ai_corpus_input_path = 'data/ai_corpus/data/hi/hi.txt'
-ai_corpus_token_path = 'data/ai_corpus/data/hi/hi.tok.txt'
+ai_corpus_input_path='data/ai_corpus/data/hi/hi.txt'
+ai_corpus_token_path='data/ai_corpus/data/hi/hi.tok.txt'
+preprocess_corpora=1
 
-# python q1.py -d $word_similarity_data -g $glove_path -gd $glove_dict_path -gof $glove_flag -c $cbow_path -s $sg_path -f $fasttext_path
-python q2.py --batch_size $batch_size --epochs $epochs --datapath $datapath
-# python q3.py --ai_corpus_input_path $ai_corpus_input_path --ai_corpus_token_path $ai_corpus_token_path
+# python q1.py -d $word_similarity_data --dim $dim -g $glove_path -gd $glove_dict_path -gof $glove_flag -c $cbow_path -s $sg_path -f $fasttext_path
+# python q2.py --batch_size $batch_size --epochs $epochs --datapath $datapath
+python q3.py --ai_corpus_input_path $ai_corpus_input_path --ai_corpus_token_path $ai_corpus_token_path --preprocess_corpora $preprocess_corpora

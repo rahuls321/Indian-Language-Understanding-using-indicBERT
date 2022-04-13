@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import argparse
 import numpy as np
 
+import time
+
 def process_sent(sent):
     normalized = normalizer.normalize(sent)
     processed = ' '.join(trivial_tokenize(normalized, lang))
@@ -21,6 +23,8 @@ def is_hindi(character):
       return False
 
 def preprocessing(input_path, output_path):
+    print("Preprocessing of the Hindi corpus started: ")
+    st = time.time()
     with open(input_path, 'r', encoding='utf-8') as in_fp,\
         open(output_path, 'w', encoding='utf-8') as out_fp:
         for line in in_fp.readlines():
@@ -29,7 +33,7 @@ def preprocessing(input_path, output_path):
             toksent = process_sent(sent)
             out_fp.write(toksent)
             out_fp.write('\n')
-
+    print(f"Total time takes to preprocess: {time.time() - st}")
 #Removing extra characters like special char, numbers, comma, full stop(hindi)
 def hindi_preprocessing(hindi_text):
     h_tokens = hindi_text.split()
@@ -314,13 +318,14 @@ if __name__ == "__main__":
     ap.add_argument("--ai_corpus_token_path", help="ai_corpus_token_path")
     ap.add_argument("--preprocess_corpora", type=int, default=0, help="ai_corpus_token_path")
     args = vars(ap.parse_args())
-
+    start_time = time.time()
     lang = 'hi'
     normalizer_factory = IndicNormalizerFactory()
     normalizer = normalizer_factory.get_normalizer(lang)
     if args["preprocess_corpora"]:
         preprocessing(args["ai_corpus_input_path"], args["ai_corpus_token_path"])
 
+    exit()
     output_path=args["ai_corpus_token_path"]
     suffixes = {u'\u093E':u'\u0906', u'\u093F':u'\u0907', u'\u0940':u'\u0908', u'\u0941':u'\u0909', u'\u0942':u'\u090A', u'\u0947':u'\u090F', u'\u0948':u'\u0910', u'\u094B':u'\u0913', u'\u094C':u'\u0914',u"ं":u"अं",u"ः":u"अ:"} 
     #{u"ा":u"अ",u"ि":u"इ",u"ी":u"ई",u"ु":u"उ",u"ू":u"ऊ",u"े":u"ए",u"ै":u"ऐ",u"ो":u"ओ",u"ौ":u"औ",u"ं":u"अं",u"ः":u"अ:"}
@@ -333,27 +338,29 @@ if __name__ == "__main__":
     print("Top 100 most trigrams char: ", c_trigrams)
     print("Top 100 most quadrigrams char: ", c_quadrigrams)
 
-    get_zipfian_dist_plot(dict(c_unigrams), 'char', 'unigram')
-    get_zipfian_dist_plot(dict(c_bigrams), 'char', 'bigram')
-    get_zipfian_dist_plot(dict(c_trigrams), 'char', 'trigram')
-    get_zipfian_dist_plot(dict(c_quadrigrams), 'char', 'quadrigram')
+    # get_zipfian_dist_plot(dict(c_unigrams), 'char', 'unigram')
+    # get_zipfian_dist_plot(dict(c_bigrams), 'char', 'bigram')
+    # get_zipfian_dist_plot(dict(c_trigrams), 'char', 'trigram')
+    # get_zipfian_dist_plot(dict(c_quadrigrams), 'char', 'quadrigram')
 
     print("Top 100 most unigrams word: ", w_unigrams)
     print("Top 100 most bigrams word: ", w_bigrams)
     print("Top 100 most trigrams word: ", w_trigrams)
     print("Top 100 most quadrigrams word: ", w_quadrigrams)
 
-    get_zipfian_dist_plot(dict(w_unigrams), 'word', 'unigram')
-    get_zipfian_dist_plot(dict(w_bigrams), 'word', 'bigram')
-    get_zipfian_dist_plot(dict(w_trigrams), 'word', 'trigram')
-    get_zipfian_dist_plot(dict(w_quadrigrams), 'word', 'quadrigram')
+    # get_zipfian_dist_plot(dict(w_unigrams), 'word', 'unigram')
+    # get_zipfian_dist_plot(dict(w_bigrams), 'word', 'bigram')
+    # get_zipfian_dist_plot(dict(w_trigrams), 'word', 'trigram')
+    # get_zipfian_dist_plot(dict(w_quadrigrams), 'word', 'quadrigram')
 
     print("Top 100 most unigrams syllable: ", s_unigrams)
     print("Top 100 most bigrams syllable: ", s_bigrams)
     print("Top 100 most trigrams syllable: ", s_trigrams)
     print("Top 100 most quadrigrams syllable: ", s_quadrigrams)
 
-    get_zipfian_dist_plot(dict(s_unigrams), 'syllable', 'unigram')
-    get_zipfian_dist_plot(dict(s_bigrams), 'syllable', 'bigram')
-    get_zipfian_dist_plot(dict(s_trigrams), 'syllable', 'trigram')
-    get_zipfian_dist_plot(dict(s_quadrigrams), 'syllable', 'quadrigram')
+    # get_zipfian_dist_plot(dict(s_unigrams), 'syllable', 'unigram')
+    # get_zipfian_dist_plot(dict(s_bigrams), 'syllable', 'bigram')
+    # get_zipfian_dist_plot(dict(s_trigrams), 'syllable', 'trigram')
+    # get_zipfian_dist_plot(dict(s_quadrigrams), 'syllable', 'quadrigram')
+
+    print("Total Time to run Q3: {} sec".format(round(time.time()-start_time, 3)))
