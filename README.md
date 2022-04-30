@@ -11,6 +11,8 @@ Contact - +91-7761937143
 
 Python version used - 3.8.12
 
+Assignment questions - https://hello.iitk.ac.in/sites/default/files/cs657a22/assignments/problems/749c29d6b8920ba1ac0d5f16e5e48d4934dba76da430c5af15b7a89d380bd8ad_assignment2.pdf
+
 *** NOTE *** 
 1. Make sure you are connected with internet. (If you are running on cse server run authenticator.py file to bypass the firewall)
 2. Make sure glove_vec.pickle file is downloaded in the utils folder. https://drive.google.com/drive/folders/1jHs1KqWFghTJ9OdXj1fdDP5FiVaQMDxm?usp=sharing
