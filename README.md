@@ -2,12 +2,12 @@
 
 Assignment 2 (Language - Hindi)
 
-Name - Rahul Kumar
+<!-- Name - Rahul Kumar
 Roll No. - 21111069
 Prog. - Mtech CSE
 Mail - rahulkumar21@iitk.ac.in
 Contact - +91-7761937143
-
+ -->
 
 Python version used - 3.8.12
 
